@@ -68,6 +68,8 @@ class QueueHandleListener implements ListenerInterface
                 case $event instanceof RetryHandle:
                     $this->logger->warning(sprintf('[%s] Retried %s.', $date, $jobClass));
                     break;
+                default:
+                    break;
             }
         }
     }
