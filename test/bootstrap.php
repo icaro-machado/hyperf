@@ -25,6 +25,6 @@ require_once BASE_PATH . '/vendor/autoload.php';
 
 Hyperf\Di\ClassLoader::init();
 
-$container = BASE_PATH . '/config/container.php';
+$container = require_once BASE_PATH . '/config/container.php';
 
 $container->get(Hyperf\Contract\ApplicationInterface::class);
