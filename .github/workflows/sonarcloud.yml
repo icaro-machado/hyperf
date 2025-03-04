@@ -20,7 +20,7 @@ jobs:
     - name: Set up PHP
       uses: shivammathur/setup-php@v2
       with:
-        php-version: '8.1'  # Defina a versão do PHP que você está utilizando no seu projeto
+        php-version: '8.2'  # Defina a versão do PHP que você está utilizando no seu projeto
         extensions: mbstring, intl, bcmath, opcache, xml, sqlite3  # Extensões necessárias para o Hyperf (ajuste conforme seu projeto)
         coverage: none
 
