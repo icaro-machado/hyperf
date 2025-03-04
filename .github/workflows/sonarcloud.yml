@@ -35,8 +35,8 @@ jobs:
     - name: Set up SonarCloud
       uses: sonarsource/sonarcloud-github-action@v2
       with:
-        organization: "icaro-machado"   # Substitua pelo nome da sua organização no SonarCloud
-        projectKey: "hyperf"  # Substitua pelo código de seu projeto no SonarCloud
+        # organization: "icaro-machado"   # Substitua pelo nome da sua organização no SonarCloud
+        # projectKey: "hyperf"  # Substitua pelo código de seu projeto no SonarCloud
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}  # O token gerado no SonarCloud (adicionado como secret no GitHub)
 
