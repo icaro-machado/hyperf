@@ -24,14 +24,6 @@ jobs:
         extensions: mbstring, intl, bcmath, opcache, xml, sqlite3  # Extensões necessárias para o Hyperf (ajuste conforme seu projeto)
         coverage: none
 
-    - name: Cache Composer dependencies
-      uses: actions/cache@v2
-      with:
-        path: ~/.composer/cache
-        key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-composer-
-
     - name: Install dependencies
       run: |
         composer install --no-progress --prefer-dist
