@@ -43,3 +43,10 @@ jobs:
     - name: Run SonarCloud analysis
       run: |
         vendor/bin/sonar-scanner  # Executa a análise do SonarCloud
+      continue-on-error: false
+
+    - name: Fail if the SonarCloud quality gate fails
+      if: ${{ failure() }}
+      run: |
+        echo "SonarCloud Quality Gate failed. Please fix the issues and try again."
+        exit 1  # Isso vai fazer a pipeline falhar se o SonarCloud encontrar problemas
