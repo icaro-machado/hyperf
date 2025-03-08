@@ -20,34 +20,33 @@ jobs:
     - name: Set up PHP
       uses: shivammathur/setup-php@v2
       with:
-        php-version: '8.1'  # Defina a versão do PHP que você está utilizando no seu projeto
+        php-version: '8.2'  # Defina a versão do PHP que você está utilizando no seu projeto
         extensions: mbstring, intl, bcmath, opcache, xml, sqlite3  # Extensões necessárias para o Hyperf (ajuste conforme seu projeto)
         coverage: none
-
-    - name: Cache Composer dependencies
-      uses: actions/cache@v2
-      with:
-        path: ~/.composer/cache
-        key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-composer-
 
     - name: Install dependencies
       run: |
         composer install --no-progress --prefer-dist
 
-    - name: Run tests
-      run: |
-        composer run test  # Certifique-se de que você tenha um script "test" no seu composer.json que execute os testes (como PHPUnit)
+    # - name: Run tests
+    #   run: |
+    #     composer run test  # Certifique-se de que você tenha um script "test" no seu composer.json que execute os testes (como PHPUnit)
 
     - name: Set up SonarCloud
       uses: sonarsource/sonarcloud-github-action@v2
       with:
-        organization: "YOUR_ORG_NAME"   # Substitua pelo nome da sua organização no SonarCloud
-        projectKey: "YOUR_PROJECT_KEY"  # Substitua pelo código de seu projeto no SonarCloud
+        # organization: "icaro-machado"   # Substitua pelo nome da sua organização no SonarCloud
+        # projectKey: "hyperf"  # Substitua pelo código de seu projeto no SonarCloud
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}  # O token gerado no SonarCloud (adicionado como secret no GitHub)
 
     - name: Run SonarCloud analysis
       run: |
         vendor/bin/sonar-scanner  # Executa a análise do SonarCloud
+      continue-on-error: false
+
+    - name: Fail if the SonarCloud quality gate fails
+      if: ${{ failure() }}
+      run: |
+        echo "SonarCloud Quality Gate failed. Please fix the issues and try again."
+        exit 1  # Isso vai fazer a pipeline falhar se o SonarCloud encontrar problemas

@@ -19,12 +19,12 @@ Swoole\Runtime::enableCoroutine(true);
 
 ! defined('BASE_PATH') && define('BASE_PATH', dirname(__DIR__, 1));
 
-require BASE_PATH . '/vendor/autoload.php';
+require_once BASE_PATH . '/vendor/autoload.php';
 
 ! defined('SWOOLE_HOOK_FLAGS') && define('SWOOLE_HOOK_FLAGS', Hyperf\Engine\DefaultOption::hookFlags());
 
 Hyperf\Di\ClassLoader::init();
 
-$container = require BASE_PATH . '/config/container.php';
+$container = require_once BASE_PATH . '/config/container.php';
 
 $container->get(Hyperf\Contract\ApplicationInterface::class);
